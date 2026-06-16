@@ -469,8 +469,8 @@ if uploaded_file is not None:
         .agg(
             Jumlah=("Nama","count"),
             Rata_IP=("Total","mean"),
-            Di_Bawah_84=("Total",
-            lambda x:(x<84).sum()),
+            Dibawah_Target=("Total",
+            lambda x:(x<TARGET_IP).sum()),
             Potensi=("Potensi Total","sum")
         )
         .reset_index()
@@ -653,11 +653,11 @@ if uploaded_file is not None:
 
     if current_mean >= TARGET_IP:
         st.success(
-            "Target 84 dapat dicapai"
+            f"Target {TARGET_IP} dapat dicapai"
         )
     else:
         st.warning(
-            "Target 84 belum dapat dicapai meskipun seluruh kandidat ditingkatkan"
+            f"Target {TARGET_IP} belum dapat dicapai meskipun seluruh kandidat ditingkatkan"
         )
 
     if not hasil.empty:
